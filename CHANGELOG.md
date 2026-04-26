@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.6
+- Saved coordinates now come from the Google menu text first.
+- Exact right-click coordinates remain debug-only fallback data.
+
 ## 0.5.5
 - Prefer the precise right-click coordinate captured before the menu opens.
 - Keep the Google menu text as a fallback and debug reference.

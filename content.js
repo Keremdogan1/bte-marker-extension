@@ -794,7 +794,7 @@
 
   function addFromTextCoordinate(text, source, forcedCoord) {
     const textCoord = parseCoordinateText(text);
-    const coord = (pendingPick && pendingPick.exactCoord) || forcedCoord || textCoord;
+    const coord = textCoord || forcedCoord || (pendingPick && pendingPick.exactCoord);
     if (!coord) return;
 
     debugLog("addFromTextCoordinate", {
@@ -825,7 +825,7 @@
     chrome.runtime.sendMessage(
       {
         type: "ADD_COORD_TEXT",
-        text: coord.lat.toFixed(12) + ", " + coord.lon.toFixed(12),
+        text: textCoord ? (textCoord.lat.toFixed(12) + ", " + textCoord.lon.toFixed(12)) : (coord.lat.toFixed(12) + ", " + coord.lon.toFixed(12)),
         source: source || "maps-menu-coordinate",
         buildingId: currentBuildingId,
         screenX: pendingPick && Number.isFinite(pendingPick.x) ? pendingPick.x : null,
