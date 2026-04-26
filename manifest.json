@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "BTE Marker Capture",
+  "version": "0.5.1",
+  "description": "Capture coordinates from Google Maps and export BTEMarker-compatible JSON.",
+  "permissions": ["storage", "tabs", "downloads"],
+  "host_permissions": [
+    "*://*.google.com/maps/*",
+    "*://*.google.com.tr/maps/*",
+    "*://*.google.co.uk/maps/*",
+    "*://*.google.de/maps/*",
+    "*://*.google.es/maps/*",
+    "*://*.google.fr/maps/*",
+    "*://*.google.it/maps/*",
+    "https://mapy.cz/*",
+    "https://discord.com/api/webhooks/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "BTE Marker",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/maps/*",
+        "*://*.google.com.tr/maps/*",
+        "*://*.google.co.uk/maps/*",
+        "*://*.google.de/maps/*",
+        "*://*.google.es/maps/*",
+        "*://*.google.fr/maps/*",
+        "*://*.google.it/maps/*",
+        "https://mapy.cz/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

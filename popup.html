@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BTE Marker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="team-selection" style="display: none; padding: 16px;">
+    <h1>Select Your Team</h1>
+    <section class="card" id="team-buttons-container" style="display: flex; flex-direction: column; gap: 8px;">
+      <!-- Buttons will be injected here -->
+    </section>
+  </div>
+
+  <main id="main-view" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <h1 style="margin: 0; font-size: 16px;">BTE Marker Capture v0.5.1</h1>
+      <button id="switchTeamBtn" style="font-size: 10px; padding: 2px 6px; min-width: 50px;">Switch</button>
+    </div>
+
+    <section class="card">
+      <h2>Building</h2>
+      <div class="row">
+        <select id="buildingSelect"></select>
+        <button id="newBuildingBtn">Create New</button>
+      </div>
+      <div class="row" style="margin-top: 8px;">
+        <button id="renameBuildingBtn">Rename</button>
+        <button id="deleteBuildingBtn" class="danger">Delete</button>
+      </div>
+      <div id="visibility-controls" style="margin-top: 12px; border-top: 1px solid #eee; padding-top: 8px;">
+        <label style="font-size: 11px; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+          <input type="checkbox" id="toggleVisibility" checked> Show on Map
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <button id="addFromTabBtn" class="accent">Add from current Maps tab</button>
+      <p class="hint">Shortcut on maps page: Alt + Shift + M</p>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <button id="copyJsonBtn">Copy JSON</button>
+        <button id="downloadJsonBtn">Download JSON</button>
+      </div>
+      <div class="row">
+        <button id="uploadDiscordBtn" class="accent">Upload to Server</button>
+      </div>
+      <div class="row" style="margin-top: 8px;">
+        <label style="font-size: 11px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+          <input type="checkbox" id="toggleDebugMode"> Debug mode
+        </label>
+      </div>
+      <div class="row">
+        <button id="clearBtn" class="danger">Clear All</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Points</h2>
+      <div id="points"></div>
+    </section>
+
+    <section class="card">
+      <h2>Corner Offsets</h2>
+      <div id="offsets"></div>
+    </section>
+
+    <div id="status"></div>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
