@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.2
+- Prioritized strict right-click menu coordinate over projection fallback.
+- Reduced small/shifted polygon risk when map zoom parsing is unreliable.
+
 ## 0.5.1
 - Added debug mode for menu capture diagnostics.
 - Prefer right-click screen coordinate as the primary corner source.

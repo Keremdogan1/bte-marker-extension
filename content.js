@@ -1046,7 +1046,7 @@
         if (pendingPick && Number.isFinite(pendingPick.x)) {
           exactCoord = getCoordinateAt(pendingPick.x, pendingPick.y, pendingPick);
         }
-        const finalCoord = exactCoord || coord;
+        const finalCoord = coord || exactCoord;
 
         if (pickMode) {
           // Use the official coordinate text from the menu first.
