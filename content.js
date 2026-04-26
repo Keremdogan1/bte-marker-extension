@@ -676,7 +676,7 @@
       zoom = 18;
     }
     
-    console.log("[BTEMarker] Parsed Map State:", { lat, lon, zoom });
+    debugLog("Parsed Map State", { lat, lon, zoom });
 
     if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
 
@@ -1034,29 +1034,26 @@
 
     for (const el of path) {
       const text = (el.innerText || el.textContent || "").trim();
-      const coord = extractStrictMenuCoordinate(text) || parseCoordinateText(text);
+      const coord = extractStrictMenuCoordinate(text);
       if (coord) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
         contextMenuArmed = false;
 
-        // Calculate the exact pixel-based coordinate first; use menu text only as fallback.
-        let exactCoord = null;
-        if (pendingPick && Number.isFinite(pendingPick.x)) {
-          exactCoord = getCoordinateAt(pendingPick.x, pendingPick.y, pendingPick);
-        }
-        const finalCoord = coord || exactCoord;
-
         if (pickMode) {
-          // Use the official coordinate text from the menu first.
-          addFromTextCoordinate(text, "maps-menu-click", finalCoord);
+          addFromTextCoordinate(text, "maps-menu-click", coord);
         } else if (offsetPickMode) {
-          pendingOffsetCoord = finalCoord;
-          openOffsetComboModal(finalCoord);
+          pendingOffsetCoord = coord;
+          openOffsetComboModal(coord);
         }
         return;
       }
+    }
+
+    if (contextMenuArmed && pickMode) {
+      debugLog("Strict menu coordinate not found", { pendingPick });
+      showToast("Google coordinate not found in menu.");
     }
   }, true);
 

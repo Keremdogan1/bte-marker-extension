@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.3
+- Hard mode now uses only the exact Google menu coordinate.
+- Removed projection fallback from the corner capture path.
+- Debug logs are quieter unless debug mode is enabled.
+
 ## 0.5.2
 - Prioritized strict right-click menu coordinate over projection fallback.
 - Reduced small/shifted polygon risk when map zoom parsing is unreliable.
