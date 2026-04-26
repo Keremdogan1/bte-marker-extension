@@ -1026,33 +1026,25 @@
     const target = event.target && event.target.nodeType === Node.ELEMENT_NODE ? event.target : null;
     if (!target) return;
 
-    const path = [];
-    let node = target;
-    for (let i = 0; node && i < 5; i++, node = node.parentElement) {
-      path.push(node);
-    }
+    const text = (target.innerText || target.textContent || "").trim();
+    const coord = extractStrictMenuCoordinate(text);
+    if (coord) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      contextMenuArmed = false;
 
-    for (const el of path) {
-      const text = (el.innerText || el.textContent || "").trim();
-      const coord = extractStrictMenuCoordinate(text);
-      if (coord) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        contextMenuArmed = false;
-
-        if (pickMode) {
-          addFromTextCoordinate(text, "maps-menu-click", coord);
-        } else if (offsetPickMode) {
-          pendingOffsetCoord = coord;
-          openOffsetComboModal(coord);
-        }
-        return;
+      if (pickMode) {
+        addFromTextCoordinate(text, "maps-menu-click", coord);
+      } else if (offsetPickMode) {
+        pendingOffsetCoord = coord;
+        openOffsetComboModal(coord);
       }
+      return;
     }
 
     if (contextMenuArmed && pickMode) {
-      debugLog("Strict menu coordinate not found", { pendingPick });
+      debugLog("Strict menu coordinate not found", { pendingPick, text });
       showToast("Google coordinate not found in menu.");
     }
   }, true);

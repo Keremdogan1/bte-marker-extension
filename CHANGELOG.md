@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.4
+- Menu capture now only reads the clicked menu item text.
+- Avoids matching ancestor menu text that could belong to a different coordinate.
+
 ## 0.5.3
 - Hard mode now uses only the exact Google menu coordinate.
 - Removed projection fallback from the corner capture path.
