@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.5
+- Prefer the precise right-click coordinate captured before the menu opens.
+- Keep the Google menu text as a fallback and debug reference.
+
 ## 0.5.4
 - Menu capture now only reads the clicked menu item text.
 - Avoids matching ancestor menu text that could belong to a different coordinate.

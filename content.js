@@ -794,7 +794,7 @@
 
   function addFromTextCoordinate(text, source, forcedCoord) {
     const textCoord = parseCoordinateText(text);
-    const coord = forcedCoord || textCoord;
+    const coord = (pendingPick && pendingPick.exactCoord) || forcedCoord || textCoord;
     if (!coord) return;
 
     debugLog("addFromTextCoordinate", {
@@ -802,6 +802,7 @@
       text,
       parsed: textCoord,
       fallback: forcedCoord,
+      exactFromPick: pendingPick && pendingPick.exactCoord ? pendingPick.exactCoord : null,
       final: coord,
       pendingPick
     });
@@ -811,6 +812,7 @@
       text,
       parsed: textCoord,
       fallback: forcedCoord,
+      exactFromPick: pendingPick && pendingPick.exactCoord ? pendingPick.exactCoord : null,
       final: coord,
       pendingPick
     });
@@ -894,6 +896,7 @@
       timestamp: Date.now(),
       ...captureMapState()
     };
+    pendingPick.exactCoord = getCoordinateAt(event.clientX, event.clientY, pendingPick);
     contextMenuArmed = true;
     debugLog("pick armed via pointerup", pendingPick);
     setDebugState({
@@ -917,6 +920,7 @@
       timestamp: Date.now(),
       ...captureMapState()
     };
+    pendingPick.exactCoord = getCoordinateAt(event.clientX, event.clientY, pendingPick);
     contextMenuArmed = true;
     debugLog("pick armed via contextmenu", pendingPick);
     setDebugState({

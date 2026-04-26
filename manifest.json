@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BTE Marker Capture",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Capture coordinates from Google Maps and export BTEMarker-compatible JSON.",
   "permissions": ["storage", "tabs", "downloads"],
   "host_permissions": [
