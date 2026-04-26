@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.7
+- Stored Google menu coordinates for list/export values.
+- Stored exact right-click coordinates for map overlay placement.
+
 ## 0.5.6
 - Saved coordinates now come from the Google menu text first.
 - Exact right-click coordinates remain debug-only fallback data.

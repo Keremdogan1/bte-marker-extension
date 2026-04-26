@@ -519,10 +519,12 @@
 
     for (let i = 0; i < pointsCache.length; i++) {
       const p = pointsCache[i];
-      if (!p || !Number.isFinite(Number(p.lat)) || !Number.isFinite(Number(p.lon))) continue;
+      const overlayLat = Number.isFinite(Number(p.exactLat)) ? Number(p.exactLat) : Number(p.lat);
+      const overlayLon = Number.isFinite(Number(p.exactLon)) ? Number(p.exactLon) : Number(p.lon);
+      if (!p || !Number.isFinite(overlayLat) || !Number.isFinite(overlayLon)) continue;
       
-      const dx = lonToX(Number(p.lon), scale) - lonToX(center.lon, scale);
-      const dy = latToY(Number(p.lat), scale) - latToY(center.lat, scale);
+      const dx = lonToX(overlayLon, scale) - lonToX(center.lon, scale);
+      const dy = latToY(overlayLat, scale) - latToY(center.lat, scale);
       
       const pos = {
         x: rect.left + rect.width / 2 + dx,
@@ -829,7 +831,9 @@
         source: source || "maps-menu-coordinate",
         buildingId: currentBuildingId,
         screenX: pendingPick && Number.isFinite(pendingPick.x) ? pendingPick.x : null,
-        screenY: pendingPick && Number.isFinite(pendingPick.y) ? pendingPick.y : null
+        screenY: pendingPick && Number.isFinite(pendingPick.y) ? pendingPick.y : null,
+        exactLat: pendingPick && pendingPick.exactCoord && Number.isFinite(pendingPick.exactCoord.lat) ? pendingPick.exactCoord.lat : null,
+        exactLon: pendingPick && pendingPick.exactCoord && Number.isFinite(pendingPick.exactCoord.lon) ? pendingPick.exactCoord.lon : null
       },
       (response) => {
         if (!response || !response.ok) {

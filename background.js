@@ -127,7 +127,7 @@ function resolveTargetBuilding(state, requestedId) {
   return { index: 0, building: state.buildings[0] };
 }
 
-async function addPointToBuilding(coord, source, buildingId, screenX, screenY) {
+async function addPointToBuilding(coord, source, buildingId, screenX, screenY, exactLat, exactLon) {
   const state = await getState();
   const target = resolveTargetBuilding(state, buildingId);
   const points = Array.isArray(target.building.points) ? [...target.building.points] : [];
@@ -141,6 +141,10 @@ async function addPointToBuilding(coord, source, buildingId, screenX, screenY) {
   if (Number.isFinite(screenX) && Number.isFinite(screenY)) {
     nextPoint.screenX = screenX;
     nextPoint.screenY = screenY;
+  }
+  if (Number.isFinite(exactLat) && Number.isFinite(exactLon)) {
+    nextPoint.exactLat = exactLat;
+    nextPoint.exactLon = exactLon;
   }
 
   points.push(nextPoint);
@@ -212,7 +216,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         message.source || "manual",
         message.buildingId,
         Number(message.screenX),
-        Number(message.screenY)
+        Number(message.screenY),
+        Number(message.exactLat),
+        Number(message.exactLon)
       );
       sendResponse({ ok: true, result });
       return;
